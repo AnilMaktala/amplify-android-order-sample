@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void createOrders(){
-        for(int i=9201;i<=12200;i++){
+        for(int i=18001;i<=21000;i++){
             createOrder(i);
         }
 
@@ -294,6 +294,8 @@ public class MainActivity extends AppCompatActivity
 
     private void displayOrders(){
         totalOrders=0;
+
+        Log.i("OrderApp", Thread.currentThread().getName());
         Amplify.DataStore.query(Order.class,
                 Where.sorted(Order.DATE.ascending()),
                 matches -> {
@@ -313,7 +315,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void clearDataStore(){
-        Amplify.DataStore.clear(
+        Amplify.DataStore.stop(
                 () -> { Log.i(logger,"Start time-->"+new Date());
                     Amplify.DataStore.start(
                             () -> {
